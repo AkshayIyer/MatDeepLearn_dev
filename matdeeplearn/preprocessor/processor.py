@@ -433,7 +433,7 @@ class DataProcessor:
             loader = ShaDowKHopSampler(data, depth= depth, num_neighbors= self.n_neighbors // divisor, **kwargs)
             i = 0
             for subData in loader:
-                for d in subData(d):
+                for d in subData:
                     print(d)
                     print(fhusiefhksjnkjvm)
                 subData['batch2'] = i
