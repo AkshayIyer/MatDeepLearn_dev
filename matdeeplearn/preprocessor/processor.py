@@ -427,10 +427,18 @@ class DataProcessor:
         print("data_list len: ", len(data_list))
 
 
+
+
         for data in data_list:
             loader = ShaDowKHopSampler(data, depth= depth, num_neighbors= self.n_neighbors // divisor, **kwargs)
+            i = 0
             for subData in loader:
+                for d in subData(d):
+                    print(d)
+                    print(fhusiefhksjnkjvm)
+                subData['batch2'] = i
                 shadow_data_list.append(subData)
+                i = i + 1
         
         print("shadow_data_list len: ", len(data_list))
         return shadow_data_list
