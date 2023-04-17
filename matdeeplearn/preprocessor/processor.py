@@ -424,9 +424,13 @@ class DataProcessor:
 
         kwargs = {'batch_size': batch_size, 'num_workers': num_workers, 'persistent_workers': persistentWorkers}
 
+        print("data_list len: ", len(data_list))
+
+
         for data in data_list:
             loader = ShaDowKHopSampler(data, depth= depth, num_neighbors= self.n_neighbors // divisor, **kwargs)
             for subData in loader:
                 shadow_data_list.append(subData)
         
+        print("shadow_data_list len: ", len(data_list))
         return shadow_data_list
