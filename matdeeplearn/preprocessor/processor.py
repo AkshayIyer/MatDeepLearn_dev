@@ -10,6 +10,9 @@ from torch_geometric.data import Data, InMemoryDataset
 from torch_geometric.transforms import Compose
 from torch_geometric.utils import dense_to_sparse
 from tqdm import tqdm
+import torch
+import torch.nn.functional as F
+from torch_geometric.loader import ShaDowKHopSampler
 
 from matdeeplearn.common.registry import registry
 from matdeeplearn.preprocessor.helpers import (
@@ -409,5 +412,13 @@ class DataProcessor:
             composition(data)
 
         clean_up(data_list, ["edge_descriptor"])
+        
+        shadow_data_list = []
 
-        return data_list
+        depth = 2
+        divisor = 3
+
+        for data in data_list:
+            shadow_data_list.append(ShaDowKHopSampler(data, depth= depth, num_neighbors= self.n_neighbors // divisor))
+        
+        return shadow_data_list
